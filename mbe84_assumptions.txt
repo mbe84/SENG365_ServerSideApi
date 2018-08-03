@@ -1,0 +1,74 @@
+In this document I will be listing the assumptions I have made for the SENG365 Assignment 1.
+
+GENERAL ASSUMPTIONS:
+I have assumed that the dates that been put into JSON body are certainly the dates that are wanted, thus StartDate does not necessarily have to be earlier than the EndDate, my code will not account for this as it is to only portray an understanding of the system.
+Photos are allowed to be changed after the start date, as otherwise isn't mentioned in the API, and this is closer to real auctions online.
+Photos don't prompt any 400 errors as this wasn't in API.
+I have assumed that the JSON inputted will not be missing parenthesise (i.e. '{' and '}') as this isn't mentioned in the API.
+When viewing all auctions, the output has been orderd by startingDate ASC. "Sorted from most recent to least recent" was a little vague so I assumed this is what was meant.
+
+ERROR CODES ASSUMPTIONS:
+DATABASE
+(POST) /reset -> 200: meaning the reset has taken place with no errors
+(POST) /reset -> 400: meaning the reset hasn't taken place because of a bad request
+(POST) /reset -> 500: meaning the reset hasn't taken place because of an error (all errors are assumed to be internal server errors)
+(POST) /resample -> 200: meaning the reset has taken place with no errors
+(POST) /resapmle -> 400: meaning the reset hasn't taken place because of a bad request (i.e. the RowDataPacket[0]  =  unidentified)                  unidentified
+(POST) /resample -> 500: meaning the reset hasn't taken place because of an error .All errors are assumed to be internal server errors (i.e. resampling twice prompts this error)
+AUCTIONS
+(GET) /auctions -> 200: meaning the method has taken place with no errors
+(GET) /auctions -> 400: meaning the method hasn't taken place because the select statement didn't have any results
+(GET) /auctions -> 500: meaning the method hasn't taken place because of an internal server error
+(POST) /auctions -> 200: meaning the method has taken place with no errors
+(POST) /auctions -> 400:
+(POST) /auctions -> 401: meaning the method hasn't taken place because the token was not in the database
+(POST) /auctions -> 500: meaning the method hasn't taken place because of an internal server error
+(GET) /auctions/{id} -> 200: meaning the method has taken place with no errors
+(GET) /auctions/{id} -> 400: meaning the method hasn't taken place because the request that took place didn't follow the correct format
+(GET) /auctions/{id} -> 404: meaning the method hasn't taken place because the select statement didn't have any results
+(GET) /auctions/{id} -> 500: meaning the method hasn't taken place because of an internal server error
+(PATCH) /auctions/{id} -> 200: meaning the method has taken place with no errors
+(PATCH) /auctions/{id} -> 400: meaning the method hasn't taken place because the request that took place didn't follow the correct format
+(PATCH) /auctions/{id} -> 401: meaning the method hasn't taken place because the token doesn't match the id of the person who posted the auction
+(PATCH) /auctions/{id} -> 403: meaning the method hasn't taken place because the auction has already been bid on
+(PATCH) /auctions/{id} -> 404: meaning the method hasn't taken place because the select statement didn't have any results
+(PATCH) /auctions/{id} -> 500: meaning the method hasn't taken place because of an internal server error
+(GET) /auctions/{id}/bids -> 200: meaning the method has taken place with no errors
+(GET) /auctions/{id}/bids -> 400: meaning the method hasn't taken place because the request that took place didn't follow the correct format
+(GET) /auctions/{id}/bids -> 404: meaning the method hasn't taken place because the select statement didn't have any results
+(GET) /auctions/{id}/bids -> 500: meaning the method hasn't taken place because of an internal server error
+(PATCH) /auctions/{id} -> 201: meaning the method has taken place with no errors
+(PATCH) /auctions/{id} -> 400: meaning the method hasn't taken place because the request that took place didn't follow the correct format (i.e. the bid amount that you're trying to place is lower than the current max bid on the auction)
+(PATCH) /auctions/{id} -> 401: meaning the method hasn't taken place because the token doesn't authorize making a bid
+(PATCH) /auctions/{id} -> 404: meaning the method hasn't taken place because the select statement didn't have any results
+(PATCH) /auctions/{id} -> 500: meaning the method hasn't taken place because of an internal server error
+PHOTOS
+(GET) /auctions/{id}/photos -> 200: meaning the method has taken place with no errors
+(GET) /auctions/{id}/photos -> 400: meaning the method hasn't taken place because the request that took place didn't follow the correct format
+(GET) /auctions/{id}/photos -> 404: meaning the photo wasn't found, and the default photo was sent in its place
+(GET) /auctions/{id}/photos -> 500: meaning the method hasn't taken place because of an internal server error
+(POST) /auctions/{id}/photos -> 201: meaning the method has taken place with no errors
+(POST) /auctions/{id}/photos -> 400: meaning the method hasn't taken place because the request that took place didn't follow the correct format
+(POST) /auctions/{id}/photos -> 401: meaning the method hasn't taken place because the X-Authorization token is wrong
+(POST) /auctions/{id}/photos -> 404: meaning the photo wasn't found, and the default photo was sent in its place
+(POST) /auctions/{id}/photos -> 500: meaning the method hasn't taken place because of an internal server error
+(DELETE) /auctions/{id}/photos -> 201: meaning the method has taken place with no errors
+(DELETE) /auctions/{id}/photos -> 401: meaning the method hasn't taken place because the X-Authorization token is wrong
+(DELETE) /auctions/{id}/photos -> 404: meaning the photo wasn't found, and the default photo was sent in its place
+(DELETE) /auctions/{id}/photos -> 500: meaning the method hasn't taken place because of an internal server errorus
+USERS
+(POST) /users -> 200: meaning the method has taken place with no errors
+(POST) /users -> 400: meaning the method hasn't taken place because the body's values were malformed
+(POST) /users -> 500: meaning the method hasn't taken place because of an internal server error
+(POST) /users/login -> 200: meaning the method has taken place with no errors
+(POST) /users/login -> 400: meaning the method hasn't taken place because the the username/email and password were wrong
+(POST) /users/login -> 500: meaning the method hasn't taken place because of an internal server error
+(POST) /users/logout -> 200: meaning the method has taken place with no errors
+(POST) /users/logout -> 400: meaning the method hasn't taken place because the the username/email and password were  wrong
+(POST) /users/logout -> 500: meaning the method hasn't taken place because of an internal server error
+(GET) /users/{id} -> 200: meaning the method has taken place with no errors
+(GET) /users/{id} -> 400: meaning the method hasn't taken place because the the username/email and password were  wrong
+(GET) /users/{id} -> 500: meaning the method hasn't taken place because of an internal server error
+(PATCH) /users/{id} -> 200: meaning the method has taken place with no errors
+(PATCH) /users/{id} -> 400: meaning the method hasn't taken place because the the token were wrong
+(PATCH) /users/{id} -> 500: meaning the method hasn't taken place because of an internal server error
